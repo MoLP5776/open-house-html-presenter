@@ -1,0 +1,55 @@
+<div class="shead" draggable="true" (dragstart)="onDragStart($event)">
+  <span class="grip">⋮⋮</span>
+  <span class="block-icon">{{ def().icon }}</span>
+  <span class="sname">{{ store.localize(def().name) }}</span>
+  <span class="tag">{{ def().cat.toUpperCase() }}</span>
+  <span class="sbtns">
+    <button [title]="s().up" (click)="store.shiftBlock(block().id, -1)">↑</button>
+    <button [title]="s().down" (click)="store.shiftBlock(block().id, 1)">↓</button>
+    <button class="del" [title]="s().del" (click)="store.removeBlock(block().id)">✕</button>
+  </span>
+</div>
+
+@if (def().fields.length) {
+  <div class="sbody">
+    @for (f of def().fields; track f.k) {
+      <div class="field">
+        <span class="flabel">{{ store.localize(f.label) }}</span>
+        <span class="fctl">
+          @switch (f.type) {
+            @case ('text') {
+              <input type="text" [class.small]="f.small" [value]="value(f.k)" (input)="onInput(f.k, $event)" />
+            }
+            @case ('color') {
+              <input type="color" [value]="value(f.k)" (input)="onInput(f.k, $event)" />
+              <code class="cval">{{ value(f.k) }}</code>
+            }
+            @case ('range') {
+              <input
+                type="range"
+                [min]="f.min"
+                [max]="f.max"
+                [value]="value(f.k)"
+                (input)="onInput(f.k, $event)"
+              />
+              <code class="cval">{{ value(f.k) }}{{ f.unit }}</code>
+            }
+            @case ('select') {
+              <select (input)="onInput(f.k, $event)">
+                @for (o of f.options; track o.v) {
+                  <option
+                    [value]="o.v"
+                    [selected]="o.v === value(f.k)"
+                    [style.font-family]="f.k === 'font' ? o.v : null"
+                  >
+                    {{ store.localize(o.label) }}
+                  </option>
+                }
+              </select>
+            }
+          }
+        </span>
+      </div>
+    }
+  </div>
+}

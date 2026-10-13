@@ -1,0 +1,17 @@
+:host { background: var(--surface-2); }
+.cat { margin-bottom: 18px; }
+.cat h3 { margin: 2px 0 0; font-family: var(--font-hand); font-size: 18px; font-weight: 700; }
+.cat > p { margin: 0 0 6px; color: var(--text-dim); font-size: 13px; }
+.pblock {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 6px; margin: 2px -6px; border-radius: 6px;
+  cursor: grab; user-select: none;
+}
+.pblock:active { cursor: grabbing; }
+/* Hovering "highlights" the name with the category's marker */
+.name { padding: 0 2px; }
+.pblock:hover .name {
+  background: linear-gradient(transparent 52%, color-mix(in srgb, var(--c) 45%, transparent) 52%);
+}
+.plus { margin-left: auto; color: var(--text-dim); font-weight: 700; opacity: 0; }
+.pblock:hover .plus { opacity: 1; }

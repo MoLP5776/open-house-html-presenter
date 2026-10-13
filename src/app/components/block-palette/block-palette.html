@@ -1,0 +1,26 @@
+<div class="panel-head">
+  <span>{{ s().blocks }}</span>
+  <span class="hint">{{ s().paletteHint }}</span>
+</div>
+
+<div class="panel-body">
+  @for (cat of categories; track cat.id) {
+    <div class="cat" [style.--c]="'var(--' + cat.id + ')'">
+      <h3>{{ cat.name }}</h3>
+      <p>{{ s()[cat.desc] }}</p>
+      @for (b of cat.blocks; track b.type) {
+        <div
+          class="pblock"
+          draggable="true"
+          [title]="b.def.tip ? store.localize(b.def.tip) : ''"
+          (click)="store.addBlock(b.type)"
+          (dragstart)="onDragStart($event, b.type)"
+        >
+          <span class="block-icon">{{ b.def.icon }}</span>
+          <span class="name">{{ store.localize(b.def.name) }}</span>
+          <span class="plus">+</span>
+        </div>
+      }
+    </div>
+  }
+</div>

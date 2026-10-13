@@ -1,0 +1,28 @@
+<div class="logo">{{ s().title }}</div>
+
+<nav class="tabs">
+  <button class="tab" [class.active]="store.mode() === 'blocks'" (click)="store.setMode('blocks')">
+    {{ s().tabBlocks }}
+  </button>
+  <button class="tab" [class.active]="store.mode() === 'code'" (click)="store.setMode('code')">
+    {{ s().tabCode }}
+  </button>
+</nav>
+
+<div class="spacer"></div>
+
+<div class="hgroup">
+  <span class="muted">{{ s().examples }}</span>
+  <button class="btn" (click)="store.loadPreset('party')">{{ s().party }}</button>
+  <button class="btn" (click)="store.loadPreset('profile')">{{ s().profile }}</button>
+</div>
+
+<button class="btn" [class.armed]="armed()" (click)="reset()">
+  {{ armed() ? s().resetConfirm : s().reset }}
+</button>
+
+<div class="langs">
+  @for (l of langs; track l) {
+    <button [class.active]="store.lang() === l" (click)="store.setLang(l)">{{ l.toUpperCase() }}</button>
+  }
+</div>

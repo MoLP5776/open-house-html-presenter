@@ -1,0 +1,9 @@
+<div class="panel-head">
+  <span>{{ s().preview }}</span>
+  <button class="btn small" (click)="full.set(!full())">
+    {{ full() ? s().exitFull : s().fullscreen }}
+  </button>
+</div>
+<div class="frame">
+  <iframe #frame title="preview" sandbox="allow-scripts allow-modals allow-popups"></iframe>
+</div>

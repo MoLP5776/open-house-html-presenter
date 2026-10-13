@@ -1,0 +1,8 @@
+<div class="panel-head"><span>{{ s().console }}</span></div>
+<div #out class="out">
+  @for (e of entries(); track $index) {
+    <div [class]="e.type">{{ e.msg }}</div>
+  } @empty {
+    <span class="placeholder">{{ s().consoleEmpty }}</span>
+  }
+</div>

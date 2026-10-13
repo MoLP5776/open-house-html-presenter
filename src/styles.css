@@ -1,1 +1,108 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+  Theme: a dark chalkboard classroom. Text is chalk, code sits on the deeper board,
+  HTML / CSS / JS are three highlighter colours — used as fills only, never as text colour.
+  Component-specific styles live next to each component.
+*/
+:root {
+  color-scheme: dark;
+
+  --bg: #161f1b;
+  --surface: #1c2622;
+  --surface-2: #222e29;
+  --card: #26332e;
+  --line: #34453d;
+  --text: #e9ece4;
+  --text-dim: #9fb0a6;
+  --accent: #ffe58a;
+  --ink: #a9cdff;
+  --margin: #e2786d;
+  --on-marker: #1a1f1c;
+
+  --board: #121b16;
+  --board-deep: #0e1612;
+  --board-ledge: #8a6a48;
+
+  --html: #ff8f3f;
+  --css: #4fb8e8;
+  --js: #ffe14a;
+
+  --gutter: 6px;
+
+  --font-hand: 'Playpen Sans Variable', 'Comic Sans MS', cursive;
+  --font-ui: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.muted, .hint { color: var(--text-dim); }
+.hint { font-family: var(--font-ui); font-weight: 400; font-size: 13px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  border: 1.5px solid var(--line); background: var(--card); padding: 6px 12px;
+  border-radius: 6px; cursor: pointer; font-weight: 700; white-space: nowrap;
+  transition: background .12s, border-color .12s, transform .1s;
+}
+.btn:hover { border-color: var(--text-dim); background: #2e3d37; }
+.btn:active { transform: translateY(1px); }
+.btn.small { padding: 3px 10px; font-size: 13px; }
+.btn.accent { background: var(--accent); border-color: var(--accent); color: var(--on-marker); }
+.btn.accent:hover { background: #fff0b3; }
+.btn.armed { background: var(--margin); border-color: var(--margin); color: var(--on-marker); }
+
+/* ---------- Panels ---------- */
+.panel { display: flex; flex-direction: column; min-height: 0; min-width: 0; background: var(--surface); }
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 14px; min-height: 46px; border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  font-family: var(--font-hand); font-size: 17px; font-weight: 600;
+}
+.panel-head .btns { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; font-family: var(--font-ui); }
+.panel-body { flex: 1; overflow: auto; padding: 12px; }
+.right { display: flex; flex-direction: column; }
+
+/* Deeper board: code, editors and console */
+.board { background: var(--board); }
+.board .panel-head { background: var(--board-deep); }
+
+/* Highlighter-filled icon (palette + stack); expects --c */
+.block-icon {
+  width: 30px; height: 30px; border-radius: 5px; flex: none;
+  display: grid; place-items: center; font-size: 14px; font-weight: 700;
+  background: var(--c); color: var(--on-marker);
+}
+
+/* Syntax highlighting = chalk colours (inserted via innerHTML, so they must be global) */
+.t-tag, .t-sel { color: #f6a6c1; } .t-attr, .t-val { color: var(--accent); }
+.t-str { color: #b8f0a6; } .t-punc { color: #7f9a8c; } .t-prop { color: #9fd8f5; }
+.t-kw { color: #d9c6ff; } .t-num { color: #ffc28a; } .t-fn { color: #a6eef0; }
+.t-com { color: #6f8a7c; font-style: italic; }
+
+/* While a splitter is dragged, iframes must not swallow the pointer */
+body.resizing { user-select: none; }
+body.resizing iframe { pointer-events: none; }
+body.resizing-x { cursor: col-resize; }
+body.resizing-y { cursor: row-resize; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #3d5047; border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Small screens: stack the columns and let the page scroll */
+@media (max-width: 860px) {
+  body { overflow: auto; }
+}

@@ -1,0 +1,42 @@
+:host {
+  display: block; overflow: hidden;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: 6px;
+  margin-bottom: 10px;
+  transition: border-color .12s;
+}
+:host(:hover), :host(:focus-within) { border-color: color-mix(in srgb, var(--c) 70%, var(--line)); }
+:host(.pop) { animation: pop .4s ease-out; }
+@keyframes pop { 0% { transform: translateY(-6px) rotate(-1deg); opacity: 0; } 100% { transform: none; opacity: 1; } }
+:host(.dragging) { opacity: .35; }
+
+/* Header strip tinted with the block's highlighter colour */
+.shead {
+  display: flex; align-items: center; gap: 9px; padding: 6px 8px;
+  cursor: grab; user-select: none;
+  background: color-mix(in srgb, var(--c) 16%, var(--card));
+}
+.shead .block-icon { width: 26px; height: 26px; }
+.grip { color: var(--text-dim); letter-spacing: -2px; font-size: 13px; }
+.sname { font-weight: 700; }
+.tag { font-size: 11px; font-weight: 700; color: var(--on-marker); background: var(--c); border-radius: 4px; padding: 1px 6px; }
+.sbtns { margin-left: auto; display: flex; gap: 2px; }
+.sbtns button { border: 0; background: transparent; width: 26px; height: 26px; border-radius: 5px; cursor: pointer; color: var(--text-dim); }
+.sbtns button:hover { background: rgba(255, 255, 255, .08); color: var(--text); }
+.sbtns button.del:hover { background: var(--margin); color: var(--on-marker); }
+
+.sbody { padding: 8px 12px 12px; display: grid; gap: 8px; }
+.field { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; }
+.flabel { color: var(--text-dim); font-size: 13px; }
+.fctl { display: flex; align-items: center; gap: 8px; min-width: 0; }
+/* Fields look like writing on a line, in blue chalk */
+.fctl input[type=text], .fctl select {
+  width: 100%; min-width: 0; background: transparent; color: var(--ink);
+  border: 0; border-bottom: 1.5px solid var(--line); border-radius: 0;
+  padding: 5px 2px; font: inherit; font-weight: 700; outline: none;
+}
+.fctl select option { background: var(--card); color: var(--text); }
+.fctl input[type=text].small { width: 80px; font-size: 22px; padding: 1px 4px; text-align: center; }
+.fctl input:focus, .fctl select:focus { border-bottom-color: var(--accent); background: rgba(255, 229, 138, .07); }
+.fctl input[type=color] { width: 42px; height: 30px; border: 1.5px solid var(--line); border-radius: 5px; background: var(--surface); padding: 2px; cursor: pointer; }
+.fctl input[type=range] { flex: 1; accent-color: var(--accent); }
+.cval { font-family: var(--mono); font-size: 12.5px; color: var(--text-dim); white-space: nowrap; }

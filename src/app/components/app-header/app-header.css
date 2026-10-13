@@ -1,0 +1,32 @@
+:host {
+  display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap;
+  padding: 10px 16px 0;
+  background: var(--board-deep);
+  border-bottom: 2px solid var(--line);
+}
+:host > :not(.tabs) { margin-bottom: 10px; align-self: center; }
+
+/* The name label on an exercise-book cover, drawn in chalk */
+.logo {
+  font-family: var(--font-hand); font-weight: 700; font-size: 22px; color: var(--accent);
+  padding: 2px 16px; border: 1.5px solid var(--text-dim); border-radius: 10px;
+  box-shadow: inset 0 0 0 3px var(--board-deep), inset 0 0 0 4px var(--text-dim);
+  white-space: nowrap;
+}
+
+/* Divider tabs: the active one joins the area below */
+.tabs { display: flex; gap: 4px; margin-bottom: -2px; }
+.tab {
+  border: 2px solid var(--line); border-bottom: 0; border-radius: 8px 8px 0 0;
+  background: var(--board); padding: 7px 18px 9px; cursor: pointer;
+  font-weight: 700; color: var(--text-dim);
+}
+.tab:hover { color: var(--text); }
+.tab.active { background: var(--surface-2); color: var(--text); padding-bottom: 11px; }
+
+.spacer { flex: 1; }
+.hgroup { display: flex; align-items: center; gap: 6px; }
+.langs { display: flex; border: 1.5px solid var(--line); border-radius: 6px; overflow: hidden; }
+.langs button { border: 0; background: var(--card); padding: 5px 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: var(--text-dim); }
+.langs button + button { border-left: 1.5px solid var(--line); }
+.langs button.active { background: var(--text); color: var(--on-marker); }

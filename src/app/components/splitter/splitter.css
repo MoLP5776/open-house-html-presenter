@@ -1,0 +1,17 @@
+:host { position: relative; flex: none; background: var(--line); touch-action: none; transition: background .12s; }
+:host(.x) { width: var(--gutter); cursor: col-resize; }
+:host(.y) { height: var(--gutter); cursor: row-resize; background: var(--board-ledge); }
+:host(:hover), :host(.active), :host(:focus-visible) { background: var(--accent); outline: none; }
+
+/* Grip */
+:host::after {
+  content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  border-radius: 2px; background: rgba(0, 0, 0, .35);
+}
+:host(.x)::after { width: 2px; height: 28px; }
+:host(.y)::after { width: 28px; height: 2px; }
+
+/* A bigger invisible grab area than the visible line */
+:host::before { content: ''; position: absolute; }
+:host(.x)::before { inset: 0 -4px; }
+:host(.y)::before { inset: -4px 0; }

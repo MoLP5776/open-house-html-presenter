@@ -1,0 +1,27 @@
+<div class="panel-head">
+  <span>{{ s().yourCode }}</span>
+  <span class="btns">
+    <button class="btn small" (click)="store.importFromBlocks()">{{ s().fromBlocks }}</button>
+    <button class="btn small" (click)="store.starterCode()">{{ s().starter }}</button>
+  </span>
+</div>
+
+<div class="tips">
+  <b>{{ s().tryThis }}</b>
+  @for (tip of s().tips; track $index) {
+    <span class="chip" [innerHTML]="tip"></span>
+  }
+</div>
+
+@for (ed of editors; track ed.part) {
+  <div class="editor" [style.--c]="'var(--' + ed.part + ')'">
+    <label [attr.for]="'ed-' + ed.part">{{ ed.name }} <small>{{ s()[ed.desc] }}</small></label>
+    <textarea
+      spellcheck="false"
+      [id]="'ed-' + ed.part"
+      [value]="store.code()[ed.part]"
+      (input)="onInput(ed.part, $event)"
+      (keydown.tab)="onTab(ed.part, $event)"
+    ></textarea>
+  </div>
+}

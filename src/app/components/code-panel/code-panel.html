@@ -1,0 +1,20 @@
+<div class="panel-head">
+  <span>{{ s().code }} <span class="hint">{{ s().hoverHint }}</span></span>
+  <span class="btns">
+    <button class="btn small" (click)="copy()">{{ copied() ? s().copied : s().copy }}</button>
+    <button class="btn small accent" (click)="editInCode()">{{ s().editInCode }}</button>
+    <button class="btn small" (click)="collapsed.set(!collapsed())">{{ collapsed() ? '▸' : '▾' }}</button>
+  </span>
+</div>
+
+<div #body class="code-body">
+  <div class="code">
+    @for (l of lines(); track $index) {
+      <span
+        class="ln"
+        [class.hl]="l.bid !== null && l.bid === store.highlightId()"
+        [innerHTML]="l.html"
+      ></span>
+    }
+  </div>
+</div>

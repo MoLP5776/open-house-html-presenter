@@ -1,0 +1,5 @@
+:host { display: flex; flex-direction: column; height: 100%; }
+main { flex: 1; min-height: 0; }
+@media (max-width: 860px) {
+  :host { height: auto; min-height: 100%; }
+}

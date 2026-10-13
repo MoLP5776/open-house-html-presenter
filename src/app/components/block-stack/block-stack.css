@@ -1,0 +1,20 @@
+/* Squared paper turned into a chalkboard: faint 5 mm grid with a margin line */
+.panel-body {
+  position: relative;
+  padding-left: 46px;
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(90deg, transparent 33px, color-mix(in srgb, var(--margin) 55%, transparent) 33px, color-mix(in srgb, var(--margin) 55%, transparent) 35px, transparent 35px),
+    linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+  background-attachment: local;
+}
+.empty {
+  border: 2px dashed var(--line); border-radius: 8px; padding: 40px 20px;
+  text-align: center; color: var(--text-dim);
+  font-family: var(--font-hand); font-size: 18px; margin-top: 8px;
+}
+.empty .big { font-size: 42px; display: block; margin-bottom: 10px; }
+/* Drop position, drawn like a chalk stroke */
+.drop-ind { height: 4px; border-radius: 4px; background: var(--accent); margin: -2px 0 8px; }
